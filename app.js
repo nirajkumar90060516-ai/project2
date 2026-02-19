@@ -63,11 +63,13 @@ const store = MongoStore.create({
 });
 
 app.use(session({
-  store,
+  store: store,
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
+
+
 
 
 
