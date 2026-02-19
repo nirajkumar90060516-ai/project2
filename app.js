@@ -62,20 +62,30 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
+store.on("error", (err) => {
+  console.log("SESSION STORE ERROR:", err);
+});
+
 app.use(session({
   store: store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true
+  }
 }));
 
 
 
 
 
-store.on("error", (err) => {
-  console.log("❌ SESSION STORE ERROR:", err);
-});
+
+// store.on("error", (err) => {
+//   console.log("❌ SESSION STORE ERROR:", err);
+// });
 
 
 // app.use(session({
