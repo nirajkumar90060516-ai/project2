@@ -62,18 +62,26 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
+app.use(session({
+  store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+
 
 store.on("error", (err) => {
   console.log("❌ SESSION STORE ERROR:", err);
 });
 
 
-app.use(session({
-  store: store,
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-}));
+// app.use(session({
+//   store: store,
+//   secret: process.env.SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+// }));
 
 
 // ================= FLASH =================
