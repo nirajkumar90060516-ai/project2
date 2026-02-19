@@ -41,13 +41,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 
-const store =  MongoStore.create ({
+const store = MongoStore.create({
   mongoUrl: dbUrl,
-  cryptoAdapter: {
+  crypto: {
     secret: process.env.SECRET,
   },
   touchAfter: 24 * 3600,
 });
+
 
 store.on("error", () => {
   console.log("ERROR IN MONGO SESSION STORE", err);
