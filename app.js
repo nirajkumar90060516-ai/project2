@@ -135,9 +135,14 @@ app.use((err, req, res, next) => {
 
   const { statusCode = 500 } = err;
 
+  if (res.headersSent) {
+    return next(err);
+  }
+
   res.status(statusCode).render("error", { err });
 
 });
+
 
 
 // ================= SERVER =================
