@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ================= SESSION STORE =================
 
-c// ================= SESSION STORE =================
+
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -62,7 +62,7 @@ store.on("error", err => {
 
 const sessionOptions = {
   store,
-  secret: process.env.SECRET,
+  secret: process.env.SECRET, // Strong secret from Render
   resave: false,
   saveUninitialized: false,
   cookie: {
